@@ -10,7 +10,7 @@ def genera_quantita_prodotti(prodotti):
     quantita = {}
     for prodotto in prodotti:
         quantita[prodotto] = random.randint(50, 200)  # quantita tra 50 e 200 pezzi
-    return quantità
+    return quantita
 
 def genera_parametri_produttivi(prodotti):
     """
