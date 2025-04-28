@@ -1,0 +1,65 @@
+import random
+
+# Definizione dei prodotti
+prodotti = ["Scheda Controllo", "Modulo Sensore", "Unita di Alimentazione"]
+
+def genera_quantita_prodotti(prodotti):
+    """
+    Genera quantità casuali da produrre per ogni tipo di prodotto.
+    """
+    quantita = {}
+    for prodotto in prodotti:
+        quantita[prodotto] = random.randint(50, 200)  # quantita tra 50 e 200 pezzi
+    return quantità
+
+def genera_parametri_produttivi(prodotti):
+    """
+    Genera parametri casuali come tempo di produzione per unità, capacità giornaliera massima per prodotto e capacità complessiva.
+    """
+    parametri = {}
+    capacita_totale = 0
+    for prodotto in prodotti:
+        tempo_unitario = random.uniform(2.0, 5.0)  # tempo di produzione unitario in minuti
+        capacita_massima = random.randint(100, 300)  # capacità massima giornaliera per prodotto
+        parametri[prodotto] = {
+            "tempo_unitario_min": tempo_unitario,
+            "capacita_massima_giornaliera": capacita_massima
+        }
+        capacita_totale += capacita_massima
+    return parametri, capacità_totale
+
+def calcola_tempo_produzione(quantita, parametri):
+    """
+    Calcola il tempo di produzione complessivo dell'intero lotto.
+    """
+    tempo_totale_minuti = 0
+    for prodotto in quantita:
+        tempo_unitario = parametri[prodotto]["tempo_unitario_min"]
+        pezzi = quantità[prodotto]
+        tempo_totale_minuti += tempo_unitario * pezzi
+    return tempo_totale_minuti
+
+def main():
+    # Generazione dati
+    quantita = genera_quantità_prodotti(prodotti)
+    parametri, capacita_complessiva = genera_parametri_produttivi(prodotti)
+
+    # Output dei dati generati
+    print("Quantità da produrre per prodotto:")
+    for prodotto, q in quantità.items():
+        print(f"  {prodotto}: {q} pezzi")
+
+    print("\nParametri produttivi:")
+    for prodotto, valori in parametri.items():
+        print(f"  {prodotto} - Tempo per unità: {valori['tempo_unitario_min']:.2f} min, Capacità giornaliera: {valori['capacita_massima_giornaliera']} pezzi")
+
+    print(f"\nCapacità complessiva giornaliera: {capacita_complessiva} pezzi")
+
+    # Calcolo tempo di produzione totale
+    tempo_totale_minuti = calcola_tempo_produzione(quantità, parametri)
+    ore, minuti = divmod(tempo_totale_minuti, 60)
+
+    print(f"\nTempo totale di produzione stimato: {int(ore)} ore e {int(minuti)} minuti.")
+
+if __name__ == "__main__":
+    main()
